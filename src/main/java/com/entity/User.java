@@ -28,6 +28,6 @@ public class User {
 	@Column(name = "dob")
 	private LocalDate dob;
 	@Column(name = "phoneNo")
-	private Long phoneNo;
+	private String phoneNo;
 
 }

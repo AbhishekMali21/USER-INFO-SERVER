@@ -14,6 +14,8 @@ import com.response.Status;
 import com.response.UserDTO;
 import com.service.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/userinfo")
 public class UserController {
@@ -23,9 +25,9 @@ public class UserController {
 
 	@PostMapping("/")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Status createUser(@RequestBody UserDTO userDTO) {
+	public Status createUser(@Valid @RequestBody UserDTO userDTO) {
 		userService.createUser(userDTO);
-		return new Status("User Created Successfully", 200);
+		return new Status("User Created Successfully", 201);
 	}
 
 	@GetMapping("id/{userId}")
