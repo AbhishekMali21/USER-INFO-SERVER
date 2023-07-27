@@ -9,7 +9,6 @@ import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -18,6 +17,9 @@ import com.entity.User;
 public class EmailUtil {
 	private static final String EMAIL_USERNAME = "gate2022goal@gmail.com";
 	private static final String EMAIL_APP_PASSWORD = "piybjdtonzfyiiwt";
+
+	private EmailUtil() {
+	}
 
 	public static void sendEmail(User savedUser) throws MessagingException {
 		String subject = "Your Information is Saved Successfully !!";
@@ -45,7 +47,7 @@ public class EmailUtil {
 	}
 
 	private static Message extracted(String subject, String contentWeb, String recipientEmail, Session session)
-			throws MessagingException, AddressException {
+			throws MessagingException {
 		Message message = new MimeMessage(session);
 		message.setFrom(new InternetAddress(EMAIL_USERNAME));
 		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
