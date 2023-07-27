@@ -2,6 +2,7 @@ package com.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@CrossOrigin
 	@PostMapping("/")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Status createUser(@Valid @RequestBody UserDTO userDTO) {
@@ -30,12 +32,14 @@ public class UserController {
 		return new Status("User Created Successfully", 201);
 	}
 
+	@CrossOrigin
 	@GetMapping("id/{userId}")
 	@ResponseStatus(HttpStatus.OK)
 	public UserDTO getUserById(@PathVariable Integer userId) {
 		return this.userService.getUserById(userId);
 	}
 
+	@CrossOrigin
 	@GetMapping("email/{email}")
 	@ResponseStatus(HttpStatus.OK)
 	public UserDTO getUserByEmail(@PathVariable String email) {
