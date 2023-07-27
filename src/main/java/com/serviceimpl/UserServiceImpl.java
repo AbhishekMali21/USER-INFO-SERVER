@@ -1,5 +1,7 @@
 package com.serviceimpl;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +10,7 @@ import com.exception.ResourceNotFoundException;
 import com.repository.UserRepo;
 import com.response.UserDTO;
 import com.service.UserService;
+import com.util.EmailUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -18,6 +21,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDTO createUser(UserDTO userDTO) {
 		User savedUser = this.userRepo.save(dtoToUser(userDTO));
+		try {
+			EmailUtil.sendEmail(savedUser);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
 		return this.userToDTO(savedUser);
 	}
 
