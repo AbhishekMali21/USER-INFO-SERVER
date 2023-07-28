@@ -19,6 +19,7 @@ import com.service.UserService;
 
 import jakarta.validation.Valid;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/userinfo")
 public class UserController {
