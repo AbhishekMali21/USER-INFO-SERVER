@@ -1,5 +1,7 @@
 package com.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -44,6 +46,13 @@ public class UserController {
 	@ResponseStatus(HttpStatus.OK)
 	public UserDTO getUserByEmail(@PathVariable String email) {
 		return this.userService.getUserByEmail(email);
+	}
+
+	@CrossOrigin
+	@GetMapping("getAllUsers")
+	@ResponseStatus(HttpStatus.OK)
+	public List<UserDTO> getAllUser() {
+		return this.userService.getAllUsers();
 	}
 
 }

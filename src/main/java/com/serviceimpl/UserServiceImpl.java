@@ -1,5 +1,8 @@
 package com.serviceimpl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +44,13 @@ public class UserServiceImpl implements UserService {
 		User user = this.userRepo.findByEmail(email)
 				.orElseThrow(() -> new ResourceNotFoundException("User", "Email", email));
 		return this.userToDTO(user);
+	}
+
+	@Override
+	public List<UserDTO> getAllUsers() {
+		List<User> users = this.userRepo.findAll();
+		List<UserDTO> userDTOs = users.stream().map(this::userToDTO).collect(Collectors.toList());
+		return userDTOs;
 	}
 
 	public User dtoToUser(UserDTO userDTO) {
